@@ -1,0 +1,67 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../polymer/lib/utils/gestures.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+
+<dom-module id="polymer-checklist">
+  <template>
+    <style>
+      .task {
+        display: flex;
+        align-items: center;
+      }
+      
+      paper-input {
+        display: inline-block;
+      }
+    </style>
+
+    <h3>Todo:</h3>
+    <dom-repeat items="{{tasks}}" as="task">
+      <template>
+        <div class="task">
+          <paper-checkbox checked="{{task.completed}}"></paper-checkbox>
+          <paper-input label="task name" no-label-float value="{{task.name}}"></paper-input> 
+        </div>
+      </template>
+    </dom-repeat>
+
+    <h3>completed:</h3>
+    <!-- add completed stuff -->
+
+    <paper-button on-click="addTask">Add Task</paper-button>
+  </template>
+  
+  <script>
+    /**
+     * `polymer-checklist`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PolymerChecklist extends Polymer.Element {
+      static get is() { return 'polymer-checklist'; }
+      static get properties() {
+        return {
+          tasks: {
+            type: Array,
+            value: () => []
+          }
+        };
+      }
+      addTask() {
+        const newTask = {
+          name: '',
+          completed: false
+        };
+        this.push('tasks', newTask);
+      }
+    }
+
+    window.customElements.define(PolymerChecklist.is, PolymerChecklist);
+  </script>
+</dom-module>

@@ -16,12 +16,13 @@
       paper-input {
         display: inline-block;
       }
-      
+
       paper-button {
         background-color: #4CAF50;
       }
     </style>
 
+    <h2>[[name]]</h2>
     <h3>Todo:</h3>
     <dom-repeat items="{{tasks}}" as="task" filter="isNotCompleted" observe="completed">
       <template>
@@ -58,6 +59,10 @@
       static get is() { return 'polymer-checklist'; }
       static get properties() {
         return {
+          name: {
+            type: String,
+            value: 'Todo list'
+          },
           tasks: {
             type: Array,
             value: () => []
